@@ -4,6 +4,10 @@ package com.example.studentmanagement.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class student {
@@ -12,9 +16,18 @@ public class student {
     @GeneratedValue
     private  Long id;
 
+    @NotBlank(message = "Name is required")
     private String name ;
+
+    @NotBlank(message = "Email is required")
+    @Email(message = "Email should be valid")
     private String email;
-    private int age ;
+
+    @Min(value = 1, message = "Age must be at least 1")
+    @Max(value = 100, message = "Age must be less than 100")
+    private int age;
+
+    @NotBlank(message = "Course is required")
     private String course;
 
     public student()
@@ -22,9 +35,7 @@ public class student {
 
     }
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() {return id;}
     public void setId(Long id){
         this.id = id;
     }
